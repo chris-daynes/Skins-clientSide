@@ -755,43 +755,23 @@ var _reduxLogger = __webpack_require__(7);
 
 var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
+var _index = __webpack_require__(27);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _patientsActions = __webpack_require__(26);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-//STEP 3. Create and define the reducers
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-        patients: [{
-            nhi: 'hjk7890',
-            firstName: 'John',
-            lastName: 'Dude'
-        }]
-    };
-    var action = arguments[1];
-    var type = action.type,
-        payload = action.payload;
-
-    switch (type) {
-        case 'ADD_PATIENT':
-            return { patients: [].concat(_toConsumableArray(state.patients), _toConsumableArray(payload)) };
-
-        case 'DELETE_A_PATIENT':
-            //create a copy of state
-            var stateArr = [].concat(_toConsumableArray(state.patients));
-            //find the index of the pt to delete using findIndex
-            var ptIndex = stateArr.findIndex(function (pt) {
-                return pt.nhi === payload.nhi;
-            }
-            //then remove from the arr using slice and return and object
-            );return { patients: [].concat(_toConsumableArray(stateArr.slice(0, ptIndex)), _toConsumableArray(stateArr.slice(ptIndex + 1))) };
-    }
-    return state;
-};
 
 //STEP 1. Create a store
 //create a store passing reducers as an argument
-var store = (0, _redux.createStore)(reducer);
+
+
+//import the reducers
+var store = (0, _redux.createStore)(_index2.default);
+
+//import the actions
+
 
 store.subscribe(function () {
     console.log('The current state: ', store.getState());
@@ -1390,6 +1370,79 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.patientsReducers = patientsReducers;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function patientsReducers() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        patients: [{
+            _id: 1,
+            nhi: 'UGT8467',
+            firstName: 'Dummy',
+            lastName: 'Patient'
+        }]
+    };
+    var action = arguments[1];
+    var type = action.type,
+        payload = action.payload;
+
+    switch (type) {
+        case 'ADD_PATIENT':
+            return { patients: [].concat(_toConsumableArray(state.patients), _toConsumableArray(payload)) };
+    }
+    return state;
+}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+//add a patient
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.addPatient = addPatient;
+function addPatient(patient) {
+    return {
+        type: 'ADD_PATIENT',
+        payload: patient
+    };
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(8);
+
+var _patientsReducers = __webpack_require__(25);
+
+exports.default = (0, _redux.combineReducers)({
+    patients: _patientsReducers.patientsReducers
+});
 
 /***/ })
 /******/ ]);
