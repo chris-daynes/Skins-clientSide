@@ -761,14 +761,30 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 //STEP 3. Create and define the reducers
 var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        patients: [{
+            nhi: 'hjk7890',
+            firstName: 'John',
+            lastName: 'Dude'
+        }]
+    };
     var action = arguments[1];
     var type = action.type,
         payload = action.payload;
 
     switch (type) {
         case 'ADD_PATIENT':
-            return [].concat(_toConsumableArray(state), _toConsumableArray(payload));
+            return { patients: [].concat(_toConsumableArray(state.patients), _toConsumableArray(payload)) };
+
+        case 'DELETE_A_PATIENT':
+            //create a copy of state
+            var stateArr = [].concat(_toConsumableArray(state.patients));
+            //find the index of the pt to delete using findIndex
+            var ptIndex = stateArr.findIndex(function (pt) {
+                return pt.nhi === payload.nhi;
+            }
+            //then remove from the arr using slice and return and object
+            );return { patients: [].concat(_toConsumableArray(stateArr.slice(0, ptIndex)), _toConsumableArray(stateArr.slice(ptIndex + 1))) };
     }
     return state;
 };
@@ -796,11 +812,12 @@ store.subscribe(function () {
         firstName: 'Stray',
         lastName: 'Cats'
     }]
-}
+});
 
-//ACTIONS
-//add a pt to state
-);store.dispatch;
+store.dispatch({
+    type: 'DELETE_A_PATIENT',
+    payload: { nhi: 'ABC1234' }
+});
 
 /***/ }),
 /* 10 */

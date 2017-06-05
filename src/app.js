@@ -4,11 +4,27 @@ import { createStore, applyMiddleWare } from 'redux'
 import logger from 'redux-logger'
 
 //STEP 3. Create and define the reducers
-const reducer = function(state=[], action) {
+const reducer = function(state={
+    patients: [{
+        nhi: 'hjk7890',
+        firstName: 'John',
+        lastName: 'Dude'
+    }]
+}, action) {
     const { type, payload } = action
     switch(type) {
         case 'ADD_PATIENT':
-        return [...state, ...payload]
+        return { patients: [...state.patients, ...payload]}
+
+        case 'DELETE_A_PATIENT':
+        //create a copy of state
+        const stateArr = [...state.patients]
+        //find the index of the pt to delete using findIndex
+        const ptIndex = stateArr.findIndex(function(pt) {
+            return pt.nhi === payload.nhi
+        })
+        //then remove from the arr using slice and return and object
+        return {patients: [...stateArr.slice(0, ptIndex), ...stateArr.slice(ptIndex + 1)]}
     }
     return state
 }
@@ -40,14 +56,7 @@ store.dispatch({
     }]
 })
 
-
-
-
-
-
-
-
-
-//ACTIONS
-//add a pt to state
-store.dispatch
+store.dispatch({
+    type: 'DELETE_A_PATIENT',
+    payload: {nhi: 'ABC1234'}
+})
