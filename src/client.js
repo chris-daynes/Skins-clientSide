@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import Main from './components/pages/main'
 
 
+
+
 //import the reducers
 import reducers from './reducers/index'
 
