@@ -58,4 +58,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators( { addPatient }, dispatch)
 }
 
-export default  connect(null, mapDispatchToProps)(PatientForm)
+export default  connect(null, mapDispatchToProps)(PatientForm);
