@@ -18593,6 +18593,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(370);
 
+var _patientsActions = __webpack_require__(213);
+
+var _reactDom = __webpack_require__(19);
+
+var _reactRedux = __webpack_require__(216);
+
+var _redux = __webpack_require__(82);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18611,6 +18619,16 @@ var PatientForm = function (_Component) {
     }
 
     _createClass(PatientForm, [{
+        key: 'handleSubmit',
+        value: function handleSubmit() {
+            var patient = [{
+                nhi: (0, _reactDom.findDOMNode)(this.refs.NHI).value,
+                firstName: (0, _reactDom.findDOMNode)(this.refs.firstName).value,
+                lastName: (0, _reactDom.findDOMNode)(this.refs.lastName).value
+            }];
+            this.props.addPatient(patient);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -18660,7 +18678,10 @@ var PatientForm = function (_Component) {
                     ),
                     _react2.default.createElement(
                         _reactBootstrap.Button,
-                        { bsStyle: 'primary' },
+                        {
+                            bsStyle: 'primary',
+                            onClick: this.handleSubmit.bind(this)
+                        },
                         'Save Patient'
                     )
                 )
@@ -18671,7 +18692,11 @@ var PatientForm = function (_Component) {
     return PatientForm;
 }(_react.Component);
 
-exports.default = PatientForm;
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({ addPatient: _patientsActions.addPatient }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(PatientForm);
 
 /***/ }),
 /* 221 */
