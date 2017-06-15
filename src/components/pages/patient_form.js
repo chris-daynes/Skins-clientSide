@@ -7,9 +7,29 @@ class PatientForm extends Component{
     render() {
         return (
             <Well>
-                I'm in the well!
                 <Panel>
-                    And I'm in the panel!
+                    <FormGroup>
+                        <ControlLabel>NHI</ControlLabel>
+                        <FormControl 
+                            type='text'
+                            placeholder='Enter the NHI'
+                            ref='NHI'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>First Name</ControlLabel>
+                        <FormControl 
+                            type='text'
+                            placeholder='Enter first name'
+                            ref='firstName'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Last Name</ControlLabel>
+                        <FormControl 
+                            type='text'
+                            placeholder='Enter last name'
+                            ref='lastName'/>
+                    </FormGroup>
+                    <Button bsStyle='primary'>Save Patient</Button>
                 </Panel>
             </Well>
         )
